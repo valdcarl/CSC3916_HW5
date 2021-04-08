@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { fetchMovie } from "../actions/movieActions";
 import {connect} from 'react-redux';
-import {Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import {saveReview} from "../actions/movieActions";
+import {Button, Card, Form, ListGroup, ListGroupItem } from 'react-bootstrap';
 import { BsStarFill } from 'react-icons/bs'
 import { Image } from 'react-bootstrap';
 
@@ -34,7 +35,7 @@ class MovieDetail extends Component {
                                     <b>{actor.actorName}</b> {actor.characterName}
                                 </p>)}
                         </ListGroupItem>
-                        <ListGroupItem><h4><BsStarFill/> {this.props.selectedMovie.avgRating}</h4></ListGroupItem>
+                        <ListGroupItem><h4><BsStarFill/> {this.props.selectedMovie.rating}</h4></ListGroupItem>
                     </ListGroup>
                     <Card.Body>
                         {this.props.selectedMovie.reviews.map((review, i) =>
@@ -43,6 +44,13 @@ class MovieDetail extends Component {
                                 &nbsp;  <BsStarFill /> {review.rating}
                             </p>
                         )}
+                    </Card.Body>
+                    <Card.Body>
+                        <Form.Group>
+                            <Form.label>Reviewer</Form.label>
+                            <Form.Control type="reviewer" placeholder="Enter Reviewer Name" />
+                        </Form.Group>
+                        <Button onClick={saveReview}>Save Review</Button>
                     </Card.Body>
                 </Card>
             )
